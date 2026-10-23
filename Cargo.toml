@@ -1,0 +1,37 @@
+[package]
+name = "todo"
+version = "0.1.0"
+edition = "2024"
+
+[package.metadata.bundle]
+name = "TodoDesktop"
+identifier = "com.PR.TodoDesktop"
+icon = ["assets/icon.icns"]
+short_description = "Simple task manager"
+
+[dependencies]
+iced = { version = "0.14.0", features = ["image", "svg", "tokio"] }
+serde = { version = "1.0.229", features = ["derive"] }
+anyhow = "1.0.104"
+directories = "6.0.0"
+keyring-core = "1.0.1"
+chacha20poly1305 = "0.11.0"
+postcard = { version = "1.1.3", features = ["use-std"] }
+tokio = { version = "1.54.1", features = ["time"] }
+
+[build-dependencies]
+winresource = "0.1.34"
+
+[target.'cfg(target_os = "macos")'.dependencies]
+apple-native-keyring-store = { version = "1", features = ["keychain"] }
+
+[target.'cfg(target_os = "windows")'.dependencies]
+windows-native-keyring-store = "1"
+
+[target.'cfg(target_os = "linux")'.dependencies]
+zbus-secret-service-keyring-store = { version = "1", features = ["crypto-rust"] }
+
+[profile.release]
+lto = true
+codegen-units = 1
+strip = true

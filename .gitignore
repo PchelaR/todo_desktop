@@ -1,0 +1,13 @@
+/target
+
+.DS_Store
+
+.idea/
+.vscode/
+
+*.dat
+*.dat.tmp
+*.dat.broken
+tasks.json
+
+assets/icon.iconset/
